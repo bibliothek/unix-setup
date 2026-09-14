@@ -1,11 +1,10 @@
 #!/bin/bash
 
-# The macOS cask drops the SDK outside the brew prefix and registers it through
-# /etc/paths.d, which only reaches newly launched login shells - not this run.
-# Homebrew also links it into its own bin, but fall back to the known location
-# rather than silently skipping if that link is missing.
-if ! command -v dotnet &> /dev/null && [ -x /usr/local/share/dotnet/dotnet ]; then
-  PATH="/usr/local/share/dotnet:$PATH"
+# dotnet-install.sh puts the SDK in $HOME/.dotnet without touching PATH, so it
+# is not visible to this run until a new shell picks it up.
+DOTNET_ROOT="${DOTNET_ROOT:-$HOME/.dotnet}"
+if ! command -v dotnet &> /dev/null && [ -x "$DOTNET_ROOT/dotnet" ]; then
+  PATH="$DOTNET_ROOT:$PATH"
 fi
 
 # The SDK is optional, so only do anything when it was actually installed.
