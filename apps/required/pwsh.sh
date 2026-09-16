@@ -1,2 +1,2 @@
 #!/bin/bash
-brew install powershell
+dotnet tool install --global PowerShell
