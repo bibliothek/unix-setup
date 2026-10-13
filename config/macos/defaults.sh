@@ -16,6 +16,8 @@ defaults write NSGlobalDomain AppleICUDateFormatStrings -dict-add 1 "y-MM-dd" 2 
 # disable press and hold for rider to work with ideavim
 defaults write com.jetbrains.rider ApplePressAndHoldEnabled -bool false
 
+defaults write com.apple.dock autohide-delay -float 0
+
 # Dock shows running applications only, never pinned ones. Restarting the Dock
 # is what makes that visible, so only do it when the setting is not already in
 # place - this runs on every setup run.
